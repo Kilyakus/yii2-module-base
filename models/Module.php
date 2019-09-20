@@ -3,7 +3,8 @@ namespace kilyakus\modules\models;
 
 use Yii;
 
-use bin\admin\helpers\Data;
+use kilyakus\helpers\Data;
+// use kilyakus\module\behaviors as ModuleBehaviors;
 use bin\admin\behaviors\CacheFlush;
 use bin\admin\behaviors\SortableModel;
 
