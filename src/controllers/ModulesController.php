@@ -5,13 +5,12 @@ use Yii;
 use yii\filters\AccessControl;
 use bin\user\filters\AccessRule;
 use yii\data\ActiveDataProvider;
-use bin\admin\models\CopyModuleForm;
 use yii\helpers\FileHelper;
 use yii\widgets\ActiveForm;
 
-use bin\admin\models\Module;
-use bin\admin\behaviors\SortableController;
-use bin\admin\behaviors\StatusController;
+use kilyakus\modules\behaviors as ModuleBehavior;
+use kilyakus\modules\models\Module;
+use kilyakus\modules\models\CopyModuleForm;
 
 class ModulesController extends \bin\admin\components\Controller
 {
@@ -21,11 +20,11 @@ class ModulesController extends \bin\admin\components\Controller
     {
         return [
             [
-                'class' => SortableController::className(),
+                'class' => ModuleBehavior\SortableController::className(),
                 'model' => Module::className()
             ],
             [
-                'class' => StatusController::className(),
+                'class' => ModuleBehavior\StatusController::className(),
                 'model' => Module::className()
             ],
             'access' => [
