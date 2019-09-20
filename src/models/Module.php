@@ -147,7 +147,12 @@ class Module extends \kilyakus\modules\components\ActiveRecord
     {
         $modules = Yii::$app->getModule('admin')->activeModules;
         if(isset($modules[$moduleName])){
-            return Yii::createObject($modules[$moduleName]->class, [$moduleName])->redirects;
+
+            $redirects = isset(Yii::createObject($modules[$moduleName]->class, [$moduleName])->redirects) 
+                ? Yii::createObject($modules[$moduleName]->class, [$moduleName])->redirects 
+                : [];
+
+            return $redirects;
         } else {
             return [];
         }
