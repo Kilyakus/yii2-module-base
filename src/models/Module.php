@@ -4,7 +4,7 @@ namespace kilyakus\modules\models;
 use Yii;
 
 use kilyakus\helpers as Helper;
-use kilyakus\module\behaviors as ModuleBehavior;
+use kilyakus\modules\behaviors as ModuleBehavior;
 
 class Module extends \kilyakus\modules\components\ActiveRecord
 {
