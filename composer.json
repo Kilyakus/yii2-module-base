@@ -12,6 +12,7 @@
         "yiisoft/yii2": ">=2.0.0",
         "kilyakus/yii2-helper-base": "*",
         "kilyakus/yii2-behavior-cacheflush": "*",
+        "kilyakus/yii2-behavior-sortablecontroller": "*",
         "kilyakus/yii2-behavior-sortablemodel": "*",
         "kilyakus/yii2-behavior-statuscontroller": "*"
     },
