@@ -3,12 +3,10 @@ namespace kilyakus\modules\models;
 
 use Yii;
 
-use kilyakus\helpers\Data;
-// use kilyakus\module\behaviors as ModuleBehaviors;
-use bin\admin\behaviors\CacheFlush;
-use bin\admin\behaviors\SortableModel;
+use kilyakus\helpers as Helper;
+use kilyakus\module\behaviors as ModuleBehavior;
 
-class Module extends \bin\admin\components\ActiveRecord
+class Module extends \kilyakus\modules\components\ActiveRecord
 {
     const STATUS_OFF= 0;
     const STATUS_ON = 1;
@@ -52,8 +50,8 @@ class Module extends \bin\admin\components\ActiveRecord
     public function behaviors()
     {
         return [
-            CacheFlush::className(),
-            SortableModel::className()
+            ModuleBehavior\CacheFlush::className(),
+            ModuleBehavior\SortableModel::className()
         ];
     }
 
@@ -85,7 +83,7 @@ class Module extends \bin\admin\components\ActiveRecord
 
     public static function findAllActive()
     {
-        return Data::cache(self::CACHE_KEY, 3600, function(){
+        return Helper\Data::cache(self::CACHE_KEY, 3600, function(){
             $result = [];
             try {
                 foreach (self::find()->where(['status' => self::STATUS_ON])->sort()->all() as $module) {
