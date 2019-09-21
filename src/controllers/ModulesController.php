@@ -12,7 +12,7 @@ use kilyakus\modules\behaviors as ModuleBehavior;
 use kilyakus\modules\models\Module;
 use kilyakus\modules\models\CopyModuleForm;
 
-class ModulesController extends \bin\admin\components\Controller
+class ModulesController extends \kilyakus\modules\components\Controller
 {
     public $rootActions = 'all';
 

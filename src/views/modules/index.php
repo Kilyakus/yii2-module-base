@@ -7,23 +7,25 @@ use kilyakus\web\widgets as Widget;
 
 $this->title = Yii::t('easyii', 'Modules');
 
+$module = Yii::$app->controller->module->id;
+
 if($data->count > 0) {
-    foreach($data->models as $module){
+    foreach($data->models as $model){
         $columns[] = [
-            ['content' => Yii::t('easyii/'.$module->name,$module->title)],
-            ['content' => '<i class="' . ($module->icon ? $module->icon : 'fa fa-asterisk') . '"></i>', 'options' => ['class' => 'text-center']],
+            ['content' => Yii::t('easyii/'.$model->name,$model->title)],
+            ['content' => '<i class="' . ($model->icon ? $model->icon : 'fa fa-asterisk') . '"></i>', 'options' => ['class' => 'text-center']],
             ['content' => (
-                $module->settings['enableMenu'] ? Html::checkbox('', $module->header == Module::MENU_ON, [
+                $model->settings['enableMenu'] ? Html::checkbox('', $model->header == Module::MENU_ON, [
                     'class' => 'switch',
-                    'data-id' => $module->primaryKey,
+                    'data-id' => $model->primaryKey,
                     'data-link' => Url::to(['/admin/modules/']),
                     'data-sublink' => 'menu-',
                     'data-reload' => '1'
                 ]) : ''
             ), 'options' => ['class' => 'text-center']],
-            ['content' => Html::checkbox('', $module->status == Module::STATUS_ON, [
+            ['content' => Html::checkbox('', $model->status == Module::STATUS_ON, [
                 'class' => 'switch',
-                'data-id' => $module->primaryKey,
+                'data-id' => $model->primaryKey,
                 'data-link' => Url::to(['/admin/modules/']),
                 'data-reload' => '1'
             ]), 'options' => ['class' => 'text-center']],
@@ -45,12 +47,12 @@ if($data->count > 0) {
                     [
                         'label' => Yii::t('easyii', 'Edit'),
                         'icon' => 'fa fa-edit',
-                        'url' => Url::to(['/admin/modules/edit/', 'id' => $module->primaryKey]),
+                        'url' => Url::to(['/' . $module . '/modules/edit/', 'id' => $model->primaryKey]),
                     ],
                     [
                         'label' => Yii::t('easyii', 'Copy'),
                         'icon' => 'glyphicon glyphicon-link',
-                        'url' => Url::to(['/admin/modules/copy/', 'id' => $module->primaryKey]),
+                        'url' => Url::to(['/' . $module . '/modules/copy/', 'id' => $model->primaryKey]),
                     ],
                     [
                         'divider' => true,
@@ -58,12 +60,12 @@ if($data->count > 0) {
                     [
                         'label' => Yii::t('easyii', 'Move up'),
                         'icon' => 'fa fa-arrow-up',
-                        'url' => Url::to(['/admin/modules/up/', 'id' => $module->primaryKey]),
+                        'url' => Url::to(['/' . $module . '/modules/up/', 'id' => $model->primaryKey]),
                     ],
                     [
                         'label' => Yii::t('easyii', 'Move down'),
                         'icon' => 'fa fa-arrow-down',
-                        'url' => Url::to(['/admin/modules/down/', 'id' => $module->primaryKey]),
+                        'url' => Url::to(['/' . $module . '/modules/down/', 'id' => $model->primaryKey]),
                     ],
                     [
                         'divider' => true,
@@ -71,7 +73,7 @@ if($data->count > 0) {
                     [
                         'label' => Yii::t('easyii', 'Delete item'),
                         'icon' => 'fa fa-times',
-                        'url' => Url::to(['/admin/modules/delete/', 'id' => $module->primaryKey]),
+                        'url' => Url::to(['/' . $module . '/modules/delete/', 'id' => $model->primaryKey]),
                         'linkOptions' => ['title' => Yii::t('easyii', 'Delete item'), 'class' => 'confirm-delete', 'data-reload' => '0'],
                     ],
                 ],
@@ -116,7 +118,7 @@ if($data->count > 0) {
         'showFooter' => true,
         'columns' => $columns
     ]); ?>
-
+    
 <?php else : ?>
     <p><?= Yii::t('easyii', 'No records found') ?></p>
 <?php endif; ?>
