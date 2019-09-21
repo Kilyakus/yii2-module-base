@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use bin\admin\models\Setting;
+use kilyakus\modules\models\Setting;
 ?>
 <?php $form = ActiveForm::begin(['enableAjaxValidation' => true]); ?>
 <?php if(IS_ROOT) : ?>

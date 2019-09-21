@@ -1,5 +1,5 @@
 <?php
-use bin\admin\models\Setting;
+use kilyakus\modules\models\Setting;
 use yii\helpers\Url;
 
 $this->title = Yii::t('easyii', 'Settings');
