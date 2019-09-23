@@ -4,7 +4,7 @@ namespace kilyakus\modules\behaviors;
 use Yii;
 use yii\db\ActiveRecord;
 use kilyakus\modules\models\Module;
-use kilyakus\modules\components\Module as ModuleComponent
+use kilyakus\modules\components\Module as ModuleComponent;
 
 class CalculateNotice extends \yii\base\Behavior
 {
