@@ -30,9 +30,9 @@ class LoginForm extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'login'      => Yii::t('user', 'Login'),
-            'password'   => Yii::t('user', 'Password'),
-            'rememberMe' => Yii::t('user', 'Remember me next time'),
+            'username' => Yii::t('easyii', 'Username'),
+            'password' => Yii::t('easyii', 'Password'),
+            'remember' => Yii::t('easyii', 'Remember me')
         ];
     }
 
@@ -69,14 +69,14 @@ class LoginForm extends ActiveRecord
         }
         $this->insert(false);
 
-        return $this->success ? Yii::$app->user->login($this->getUser(), \kilyakus\modules\models\Setting::get('auth_time') ?: null ) : false;
+        return $this->success ? Yii::$app->systemUser->login($this->getUser(), Setting::get('auth_time') ?: null ) : false;
 
     }
 
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = \bin\admin\models\User::findByUsername($this->username);
+            $this->_user = Admin::findByUsername($this->username);
         }
 
         return $this->_user;

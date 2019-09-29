@@ -14,7 +14,7 @@ class SignController extends \yii\web\Controller
         $model = new LoginForm;
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(Yii::$app->user->getReturnUrl(['/lab']));
+            return $this->redirect(Yii::$app->systemUser->getReturnUrl(['/']));
         } else {
             return $this->render('in', [
                 'model' => $model,
@@ -24,7 +24,7 @@ class SignController extends \yii\web\Controller
 
     public function actionOut()
     {
-        Yii::$app->user->logout();
+        Yii::$app->systemUser->logout();
 
         return $this->redirect(Yii::$app->homeUrl);
     }

@@ -10,12 +10,16 @@ class AdminModule extends \bin\admin\AdminModule
  //        if(!parent::beforeAction($action))
  //            return false;
 
- //        if(!IS_ROOT && Yii::$app->controller->id != 'sign' || Yii::$app->user->isGuest){
+ //        if($action->controller->id != 'sign'){
+	//         if(!Yii::$app->userAdmin->identity->isRoot() || Yii::$app->userAdmin->isGuest){
 
- //            Yii::$app->user->setReturnUrl(Yii::$app->request->url);
- //            Yii::$app->getResponse()->redirect(['/lab/sign/in'])->send();
+	//             Yii::$app->user->setReturnUrl(Yii::$app->request->url);
+	//             Yii::$app->getResponse()->redirect(['/system/sign/in'])->send();
 
- //            return false;
- //        }
+	//             return false;
+	//         }
+	//     }else{
+	//     	parent::beforeAction($action);
+	//     }
  //    }
 }
