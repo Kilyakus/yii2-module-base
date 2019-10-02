@@ -29,10 +29,10 @@ $this->title = Yii::t('easyii', 'Settings');
                     <td><?= $setting->primaryKey ?></td>
                     <td><?= $setting->name ?></td>
                 <?php endif; ?>
-                <td><a href="<?= Url::toRoute(['/admin/settings/edit', 'id' => $setting->primaryKey]) ?>" title="<?= Yii::t('easyii', 'Edit') ?>"><?= $setting->title ?></a></td>
+                <td><a href="<?= Url::toRoute(['/system/settings/edit', 'id' => $setting->primaryKey]) ?>" title="<?= Yii::t('easyii', 'Edit') ?>"><?= $setting->title ?></a></td>
                 <td style="overflow: hidden"><?= $setting->value ?></td>
                 <?php if(IS_ROOT) : ?>
-                    <!-- <td><a href="<?= Url::to(['/admin/settings/delete', 'id' => $setting->primaryKey]) ?>" class="glyphicon glyphicon-remove confirm-delete" title="<?= Yii::t('easyii', 'Delete item') ?>"></a></td> -->
+                    <!-- <td><a href="<?= Url::to(['/system/settings/delete', 'id' => $setting->primaryKey]) ?>" class="glyphicon glyphicon-remove confirm-delete" title="<?= Yii::t('easyii', 'Delete item') ?>"></a></td> -->
                 <?php endif; ?>
             </tr>
         <?php endforeach; ?>
