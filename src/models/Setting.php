@@ -3,7 +3,7 @@ namespace kilyakus\modules\models;
 
 use Yii;
 
-use kilyakus\modules\helpers\Data;
+use kilyakus\helpers\Data;
 use kilyakus\modules\behaviors\CacheFlush;
 
 class Setting extends \kilyakus\modules\components\ActiveRecord
