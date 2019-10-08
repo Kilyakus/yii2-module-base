@@ -29,7 +29,7 @@ if($data->count > 0) {
                 'data-link' => Url::to(['/admin/modules/']),
                 'data-reload' => '1'
             ]), 'options' => ['class' => 'text-center']],
-            ['content' => Widget\DropDown::widget([
+            ['content' => Widget\Dropdown::widget([
                 'button' => [
                     'icon' => 'fa fa-cog',
                     'iconPosition' => Widget\Button::ICON_POSITION_LEFT,
