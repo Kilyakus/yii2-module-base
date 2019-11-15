@@ -23,12 +23,17 @@ class SortableController extends \yii\base\Behavior
             $query = $modelClass::find()->orderBy('order_num ' . $orderDir)->limit(1);
 
             $where = [$eq, 'order_num', $model->order_num];
+
             if (count($condition)) {
-                $where = ['and', $where];
-                foreach ($condition as $key => $value) {
-                    $where[] = [$key => $value];
-                }
+
+                // $where = ['and', $where];
+                // foreach ($condition as $key => $value) {
+                //     $where[] = [$key => $value];
+                // }
+
+                $where = ['and', $where, $condition];
             }
+            
             $modelSwap = $query->where($where)->one();
 
             if (!empty($modelSwap)) {
