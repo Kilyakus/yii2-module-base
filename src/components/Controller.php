@@ -9,7 +9,7 @@ class Controller extends \bin\admin\components\AppController
     public function init()
     {
         parent::init();
-        
+
         if($this->module->module->id == 'admin' || $this->module->module->id == 'app'){
             $this->layout = Yii::$app->getModule('admin')->controllerLayout;
         }
