@@ -1,17 +1,26 @@
 <?php
 use yii\helpers\Url;
 
+use kilyakus\web\widgets as Widget;
+
 $action = $this->context->action->id;
 ?>
-<ul class="nav nav-pills">
-    <li <?= ($action === 'index') ? 'class="active"' : '' ?>>
-        <a href="<?= $this->context->getReturnUrl(['/admin/modules']) ?>">
-            <?php if($action === 'edit' || $action === 'settings') : ?>
-                <i class="glyphicon glyphicon-chevron-left font-12"></i>
-            <?php endif; ?>
-            <?= Yii::t('easyii', 'List') ?>
-        </a>
-    </li>
-    <li <?= ($action==='create') ? 'class="active"' : '' ?>><a href="<?= Url::to(['/admin/modules/create']) ?>"><?= Yii::t('easyii', 'Create') ?></a></li>
-</ul>
-<br/>
+
+<?= Widget\NavPage::widget([
+	'options' => [
+		'class' => 'nav-pills',
+	],
+	'encodeLabels' => false,
+	'items' => [
+		[
+			'label' => ($action !== 'edit' && $action !== 'settings' ? '<i class="fa fa-list"></i>&nbsp; ' : '<i class="fa fa-arrow-left"></i>&nbsp; ') . Yii::t('easyii', 'List'),
+			'url' => $this->context->getReturnUrl(['/system/modules']),
+			'active' => ($action === 'index'),
+		],
+		[
+			'label' => '<i class="fa fa-plus"></i>&nbsp; ' . Yii::t('easyii', 'Create'),
+			'url' => Url::to(['/system/modules/create']),
+			'active' => ($action === 'create'),
+		]
+	],
+]) ?>

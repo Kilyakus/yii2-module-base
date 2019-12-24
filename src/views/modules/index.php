@@ -18,7 +18,7 @@ if($data->count > 0) {
                 $model->settings['enableMenu'] ? Html::checkbox('', $model->header == Module::MENU_ON, [
                     'class' => 'switch',
                     'data-id' => $model->primaryKey,
-                    'data-link' => Url::to(['/admin/modules/']),
+                    'data-link' => Url::to(['/system/modules/']),
                     'data-sublink' => 'menu-',
                     'data-reload' => '1'
                 ]) : ''
@@ -26,7 +26,7 @@ if($data->count > 0) {
             ['content' => Html::checkbox('', $model->status == Module::STATUS_ON, [
                 'class' => 'switch',
                 'data-id' => $model->primaryKey,
-                'data-link' => Url::to(['/admin/modules/']),
+                'data-link' => Url::to(['/system/modules/']),
                 'data-reload' => '1'
             ]), 'options' => ['class' => 'text-center']],
             ['content' => Widget\Dropdown::widget([

@@ -2,11 +2,25 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use kilyakus\web\widgets as Widget;
+
 $this->title = $model->title;
 ?>
 <?= $this->render('_menu') ?>
-<div class="card">
-    <?= $this->render('_submenu', ['model' => $model]) ?>
+
+<?php Widget\Portlet::begin([
+    'options' => ['class' => 'kt-portlet--tabs', 'id' => 'kt_page_portlet'],
+    'headerContent' => $this->render('_submenu', ['model' => $model]) . '<div class="d-flex align-items-center">' . Widget\Button::widget([
+        'type' => Widget\Button::TYPE_DANGER,
+        'title' => Yii::t('easyii', 'Restore default settings'),
+        'icon' => 'fa fa-broom',
+        'outline' => true,
+        'url' => Url::to(['/system/modules/restore-settings', 'id' => $model->module_id]),
+        'options' => [
+            'class' => 'pull-right'
+        ]
+    ]) . '</div>'
+]); ?>
     <?php if(sizeof($model->settings) > 0) : ?>
         <?= Html::beginForm(); ?>
         <table class="table table-hover">
@@ -69,10 +83,17 @@ $this->title = $model->title;
         <?php endforeach; ?>
         </tbody>
         </table>
-        <?= Html::submitButton(Yii::t('easyii', 'Save'), ['class' => 'btn btn-primary']) ?>
+        <?= Widget\Button::widget([
+            'type' => Widget\Button::TYPE_SUCCESS,
+            'title' => Yii::t('easyii', 'Save'),
+            'icon' => 'fa fa-check',
+            'block' => true,
+            'options' => [
+                'type' => 'submit'
+            ]
+        ]) ?>
         <?php Html::endForm(); ?>
     <?php else : ?>
         <?= $model->title ?> <?= Yii::t('easyii', 'module doesn`t have any settings.') ?>
     <?php endif; ?>
-    <a href="<?= Url::to(['/system/modules/restore-settings', 'id' => $model->module_id]) ?>" class="pull-right text-warning"><i class="glyphicon glyphicon-flash"></i> <?= Yii::t('easyii', 'Restore default settings') ?></a>
-</div>
+<?php Widget\Portlet::end(); ?>

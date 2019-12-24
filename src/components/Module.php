@@ -4,25 +4,14 @@ namespace kilyakus\modules\components;
 use Yii;
 use kilyakus\modules\models\Module as ModuleModel;
 
-/**
- * Base module class. Inherit from this if you are creating your own modules manually
- * @package bin\admin\components
- */
 class Module extends \yii\base\Module
 {
-    /** @var string  */
     public $defaultRoute = 'a';
 
-    /** @var array  */
     public $settings = [];
 
-    /** @var  @todo */
     public $i18n;
 
-    /**
-     * Configuration for installation
-     * @var array
-     */
     public static $installConfig = [
         'title' => [
             'ru' => 'Пользовательский модуль',
@@ -41,10 +30,6 @@ class Module extends \yii\base\Module
         }
     }
 
-    /**
-     * Registers translations connected to the module
-     * @param $moduleName string
-     */
     public static function registerTranslations($moduleName)
     {
         $moduleClassFile = '';
@@ -68,12 +53,6 @@ class Module extends \yii\base\Module
         }
     }
 
-    /**
-     * Module name getter
-     *
-     * @param $namespace
-     * @return string|bool
-     */
     public static function getModuleName($namespace)
     {
         foreach(ModuleModel::findAllActive() as $module)

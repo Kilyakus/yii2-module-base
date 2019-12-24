@@ -15,7 +15,7 @@ class SettingsController extends \kilyakus\modules\components\Controller
         $data = new ActiveDataProvider([
             'query' => Setting::find()->where(['>=', 'visibility', IS_ROOT ? Setting::VISIBLE_ROOT : Setting::VISIBLE_ALL]),
         ]);
-        Yii::$app->user->setReturnUrl('/admin/settings');
+        Yii::$app->user->setReturnUrl('/system/settings');
 
         return $this->render('index', [
             'data' => $data
@@ -34,7 +34,7 @@ class SettingsController extends \kilyakus\modules\components\Controller
             else{
                 if($model->save()){
                     $this->flash('success', Yii::t('easyii', 'Setting created'));
-                    return $this->redirect('/admin/settings');
+                    return $this->redirect('/system/settings');
                 }
                 else{
                     $this->flash('error', Yii::t('easyii', 'Create error. {0}', $model->formatErrors()));
@@ -55,7 +55,7 @@ class SettingsController extends \kilyakus\modules\components\Controller
 
         if($model === null || ($model->visibility < (IS_ROOT ? Setting::VISIBLE_ROOT : Setting::VISIBLE_ALL))){
             $this->flash('error', Yii::t('easyii', 'Not found'));
-            return $this->redirect(['/admin/settings']);
+            return $this->redirect(['/system/settings']);
         }
 
         if ($model->load(Yii::$app->request->post())) {

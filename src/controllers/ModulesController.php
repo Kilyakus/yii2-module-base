@@ -47,7 +47,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
         $data = new ActiveDataProvider([
             'query' => Module::find()->sort(),
         ]);
-        Yii::$app->user->setReturnUrl('/admin/modules');
+        Yii::$app->user->setReturnUrl('/system/modules');
 
         return $this->render('index', [
             'data' => $data
@@ -66,7 +66,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
             else{
                 if($model->save()){
                     $this->flash('success', Yii::t('easyii', 'Module created'));
-                    return $this->redirect(['/admin/modules']);
+                    return $this->redirect(['/system/modules']);
                 }
                 else{
                     $this->flash('error', Yii::t('Create error. {0}', $model->formatErrors()));
@@ -87,7 +87,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
 
         if($model === null){
             $this->flash('error', Yii::t('easyii', 'Not found'));
-            return $this->redirect(['/admin/modules']);
+            return $this->redirect(['/system/modules']);
         }
 
         if ($model->load(Yii::$app->request->post())) {
@@ -118,7 +118,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
 
         if($model === null){
             $this->flash('error', Yii::t('easyii', 'Not found'));
-            return $this->redirect(['/admin/modules']);
+            return $this->redirect(['/system/modules']);
         }
 
         if (Yii::$app->request->post('Settings')) {
@@ -157,7 +157,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
 
         if($model === null){
             $this->flash('error', Yii::t('easyii', 'Not found'));
-            return $this->redirect(['/admin/modules']);
+            return $this->redirect(['/system/modules']);
         }
 
         if (Yii::$app->request->post('Redirects')) {
@@ -197,7 +197,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
 
         if($module === null){
             $this->flash('error', Yii::t('easyii', 'Not found'));
-            return $this->redirect('/admin/modules');
+            return $this->redirect('/system/modules');
         }
         if ($formModel->load(Yii::$app->request->post())){
             if(Yii::$app->request->isAjax){
@@ -264,7 +264,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
                 //Copying module tables
                 foreach(glob($newModuleFolder . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . '*.php') as $modelFile){
                     $baseName = basename($modelFile, '.php');
-                    $modelClass = $newNameSpace.'\models\\'.$baseName;
+                    $modelClass = $oldNameSpace.'\models\\'.$baseName;
 
                     $oldTableName = $modelClass::tableName();
                     $newTableName = str_replace($module->name, $formModel->name, $oldTableName);
@@ -297,7 +297,7 @@ class ModulesController extends \kilyakus\modules\components\Controller
 
                 if($newModule->save()){
                     $this->flash('success', 'New module created');
-                    return $this->redirect(['/admin/modules/edit', 'id' => $newModule->primaryKey]);
+                    return $this->redirect(['/system/modules/edit', 'id' => $newModule->primaryKey]);
                 } else {
                     $this->flash('error', 'Module create error. ' . $newModule->formatErrors());
                     FileHelper::removeDirectory($newModuleFolder);

@@ -1,12 +1,36 @@
 <?php
 use yii\helpers\Url;
 
+use kilyakus\web\widgets as Widget;
+
 $action = $this->context->action->id;
 ?>
-<ul class="nav nav-tabs">
-    <li <?= ($action === 'edit') ? 'class="active"' : '' ?>><a href="<?= Url::to(['/system/modules/edit/', 'id' => $model->primaryKey]) ?>"> <?= Yii::t('easyii', 'Basic') ?></a></li>
-    <li <?= ($action === 'settings') ? 'class="active"' : '' ?>><a href="<?= Url::to(['/system/modules/settings/', 'id' => $model->primaryKey]) ?>"><i class="glyphicon glyphicon-cog"></i> <?= Yii::t('easyii', 'Advanced') ?></a></li>
-    <li <?= ($action === 'redirects') ? 'class="active"' : '' ?>><a href="<?= Url::to(['/system/modules/redirects/', 'id' => $model->primaryKey]) ?>"><i class="glyphicon glyphicon-share-alt"></i> <?= Yii::t('easyii', 'Redirects') ?></a></li>
-    <li class="pull-right <?= ($action === 'copy') ? 'active' : '' ?>"><a href="<?= Url::to(['/system/modules/copy/', 'id' => $model->primaryKey]) ?>" class="text-muted"><?= Yii::t('easyii', 'Copy') ?></a></li>
-</ul>
-<br>
+
+<?= Widget\Nav::widget([
+	'options' => [
+		'class' => 'nav-tabs nav-tabs-line nav-tabs-line-brand nav-tabs-line-2x',
+	],
+	'encodeLabels' => false,
+	'items' => [
+		[
+			'label' => '<span class="fa fa-sliders-h"></span>&nbsp; ' . Yii::t('easyii', 'Basic'),
+			'url' => Url::to(['/system/modules/edit/', 'id' => $model->primaryKey]),
+			'active' => ($action === 'edit'),
+		],
+		[
+			'label' => '<span class="fa fa-cog"></span>&nbsp; ' . Yii::t('easyii', 'Advanced'),
+			'url' => Url::to(['/system/modules/settings/', 'id' => $model->primaryKey]),
+			'active' => ($action === 'settings'),
+		],
+		[
+			'label' => '<span class="fa fa-share"></span>&nbsp; ' . Yii::t('easyii', 'Redirects'),
+			'url' => Url::to(['/system/modules/redirects/', 'id' => $model->primaryKey]),
+			'active' => ($action === 'redirects'),
+		],
+		[
+			'label' => '<span class="fa fa-copy"></span>&nbsp; ' . Yii::t('easyii', 'Copy'),
+			'url' => Url::to(['/system/modules/copy/', 'id' => $model->primaryKey]),
+			'active' => ($action === 'copy'),
+		],
+	],
+]) ?>

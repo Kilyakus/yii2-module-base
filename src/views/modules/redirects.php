@@ -2,11 +2,26 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use kilyakus\web\widgets as Widget;
+
 $this->title = $model->title;
 ?>
 <?= $this->render('_menu') ?>
-<div class="card">
-    <?= $this->render('_submenu', ['model' => $model]) ?>
+
+<?php Widget\Portlet::begin([
+    'options' => ['class' => 'kt-portlet--tabs', 'id' => 'kt_page_portlet'],
+    'headerContent' => $this->render('_submenu', ['model' => $model]) . '<div class="d-flex align-items-center">' . Widget\Button::widget([
+        'type' => Widget\Button::TYPE_DANGER,
+        'title' => Yii::t('easyii', 'Restore default redirects'),
+        'icon' => 'fa fa-broom',
+        'outline' => true,
+        'url' => Url::to(['/system/modules/restore-redirects', 'id' => $model->module_id]),
+        'options' => [
+            'class' => 'pull-right'
+        ]
+    ]) . '</div>'
+]); ?>
+
     <?php if(sizeof($model->redirects) > 0) : ?>
         <?= Html::beginForm(); ?>
         <table class="table table-hover">
@@ -46,10 +61,17 @@ $this->title = $model->title;
         <?php endforeach; ?>
         </tbody>
         </table>
-        <?= Html::submitButton(Yii::t('easyii', 'Save'), ['class' => 'btn btn-primary']) ?>
+        <?= Widget\Button::widget([
+            'type' => Widget\Button::TYPE_SUCCESS,
+            'title' => Yii::t('easyii', 'Save'),
+            'icon' => 'fa fa-check',
+            'block' => true,
+            'options' => [
+                'type' => 'submit'
+            ]
+        ]) ?>
         <?php Html::endForm(); ?>
     <?php else : ?>
         <?= Yii::t('easyii', 'Module') ?> "<?= Yii::t('easyii/'.$model->name, $model->title) ?>" <?= Yii::t('easyii', 'doesn`t have any redirects') ?>.
     <?php endif; ?>
-    <a href="<?= Url::to(['/admin/modules/restore-redirects', 'id' => $model->module_id]) ?>" class="pull-right text-warning"><i class="glyphicon glyphicon-flash"></i> <?= Yii::t('easyii', 'Restore default redirects') ?></a>
-</div>
+<?php Widget\Portlet::end(); ?>
