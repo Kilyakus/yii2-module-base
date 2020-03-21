@@ -23,7 +23,7 @@ class TranslationsController extends \kilyakus\modules\components\Controller
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate($slug = null)
     {
         $model = new TSourceMessage;
 
@@ -57,8 +57,13 @@ class TranslationsController extends \kilyakus\modules\components\Controller
             }
         }
         else {
+
+            if($slug){
+                $model->message = $slug;
+            }
+
             return $this->render('create', [
-                'model' => $model
+                'model' => $model,
             ]);
         }
     }

@@ -18,7 +18,7 @@ $action = $this->context->action->id;
 			'active' => ($action === 'edit'),
 		],
 		[
-			'label' => '<span class="fa fa-cog"></span>&nbsp; ' . Yii::t('easyii', 'Advanced'),
+			'label' => '<span class="fa fa-cog"></span>&nbsp; ' . Yii::t('easyii', 'Advanced settings'),
 			'url' => Url::to(['/system/modules/settings/', 'id' => $model->primaryKey]),
 			'active' => ($action === 'settings'),
 		],
