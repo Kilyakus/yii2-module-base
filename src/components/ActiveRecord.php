@@ -4,6 +4,7 @@ namespace kilyakus\modules\components;
 class ActiveRecord extends \yii\db\ActiveRecord
 {
     public static $SLUG_PATTERN = '/^[0-9a-z-]{0,128}$/';
+    public static $KEY_PATTERN = '/^[A-z-]{0,128}$/';
 
     public $transferClasses = [];
 

@@ -1,25 +1,32 @@
 <?php
 use yii\helpers\Html;
+use kilyakus\web\Engine;
 
-$asset = \kilyakus\modules\assets\EmptyAsset::register($this);
+Engine::registerThemeAsset($this);
+
+$this->beginPage();
+
+$this->registerCss("
+html, body {margin:0px;width:100%;height:100%;}
+#yii-debug-toolbar {opacity:0;left:100%;}
+");
 ?>
-<?php $this->beginPage() ?>
+<!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
     <head>
-        <meta charset="<?= Yii::$app->charset ?>"/>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <?= Html::csrfMetaTags() ?>
-        <title><?= Yii::t('easyii', 'Control Panel') ?> - <?= Html::encode($this->title) ?></title>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="<?= $asset->baseUrl ?>/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="<?= $asset->baseUrl ?>/favicon.ico" type="image/x-icon">
+        <meta name="robots" content="noindex">
+        <base target="_parent">
+        <!-- <base target="_top"> -->
+        <title><?= Yii::t('easyii', Html::encode($this->title)) ?></title>
         <?php $this->head() ?>
     </head>
     <body>
-<?php $this->beginBody() ?>
-<div class="container">
-    <?= $content ?>
-</div>
-<?php $this->endBody() ?>
+        <?php $this->beginBody() ?>
+            <?= $content ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

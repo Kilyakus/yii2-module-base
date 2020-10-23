@@ -3,7 +3,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use bin\admin\components\API;
-use kilyakus\imageprocessor\Image;
+use kilyakus\helper\media\Image;
 use bin\admin\modules\page\api\Page;
 
 use kilyakus\web\Engine;
