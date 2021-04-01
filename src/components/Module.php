@@ -24,9 +24,13 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        foreach(Yii::$app->getModule('admin')->activeModules as $module){
-            $moduleName = self::getModuleName($module->class);
-            self::registerTranslations($moduleName);
+
+        $modules = Yii::$app->getModule('admin')->activeModules;
+
+        foreach($modules as $module)
+        {
+            $moduleName = static::getModuleName($module->class);
+            static::registerTranslations($moduleName);
         }
     }
 
